@@ -98,3 +98,6 @@ case $- in *i*)
   esac
 
 source $ZSH/oh-my-zsh.sh
+
+#For running ssh-agent using systemd
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
