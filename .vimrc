@@ -1,23 +1,27 @@
 call plug#begin()
 
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdcommenter'
-Plug 'c.vim'
+Plug 'scrooloose/nerdtree'              "File Browsing, t, i, s for tab, horizontal, vertical split opening, m to open menu
+Plug 'tpope/vim-fugitive'               "Git wrapper
+Plug 'scrooloose/syntastic'             "Syntax checking
+Plug 'tpope/vim-surround'               "Easier to modify braces, quotes etc. Use cs<to replace><replacement>, ds=delete surrounding
+Plug 'bling/vim-airline'                "Bottom bar
+Plug 'scrooloose/nerdcommenter'         "Easier commenting
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable'} 
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-sensible'
-Plug 'sickill/vim-pasta'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'christoomey/vim-tmux-navigator'   "Switching between tmux and vim splits easily
+Plug 'junegunn/vim-easy-align'          "Select text, then run 'ga' and then <char to align around>
+Plug 'tpope/vim-sensible'               "Sensible defaults
+Plug 'sickill/vim-pasta'                "Context aware pasting
+Plug 'ctrlpvim/ctrlp.vim'               "Fuzzy file finder
+Plug 'octol/vim-cpp-enhanced-highlight' "Duh
+Plug 'majutsushi/tagbar'                "Tags
+Plug 'raimondi/delimitmate'             "Automatically inserting braces, etc
+Plug 'shougo/neocomplete.vim'           "Neocomplete
+Plug 'shougo/neco-vim'
 
 call plug#end()
 
 
-autocmd VimEnter * NERDTree
+"autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -77,3 +81,47 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 autocmd InsertEnter * :set number | :set rnu!
 autocmd InsertLeave * :set relativenumber | :set nu!
+
+"autocmd VimEnter *.c,*.cpp,*.h,*.hpp,*.py,*.sh :TagbarOpen
+"autocmd BufWrite *.c,*.cpp,*.h,*.hpp,*.py :call ResetTagbar()
+
+function! ResetTagbar()
+    :TagbarClose
+    :TagbarOpen
+endfunction
+
+let g:tagbar_autoclose = 1
+let b:delimitMate_jump_expansion = 1
+let b:delimitMate_expand_space = 1
+let b:delimitMate_expand_cr = 1
+:setlocal foldmethod=syntax
+
+"Set up shortcuts for cscope
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+
+  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif
+
+"Setup shortcuts for Tagbar
+nmap <F8> :TagbarToggle<CR>
+nmap tb :TagbarToggle<CR>
+
+"Set up shortcut for NERDTree
+nmap tn :NERDTreeToggle<CR>
+
+"Enable neocomplete
+let g:neocomplete#enable_at_startup = 1 
+
+map ; :
