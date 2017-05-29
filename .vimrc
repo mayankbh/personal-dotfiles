@@ -15,8 +15,14 @@ Plug 'ctrlpvim/ctrlp.vim'               "Fuzzy file finder
 Plug 'octol/vim-cpp-enhanced-highlight' "Duh
 Plug 'majutsushi/tagbar'                "Tags
 Plug 'raimondi/delimitmate'             "Automatically inserting braces, etc
-Plug 'shougo/neocomplete.vim'           "Neocomplete
-Plug 'shougo/neco-vim'
+"Plug 'shougo/neocomplete.vim'           "Neocomplete
+"Plug 'shougo/neco-vim'                  "Vim completion
+"Plug 'osyo-manga/vim-marching'          "Async clang completion
+Plug 'valloric/youcompleteme'
+Plug 'sheerun/vim-polyglot'
+Plug 'xolox/vim-misc'                   "Dependency for vim-easytags
+Plug 'xolox/vim-easytags'
+
 
 call plug#end()
 
@@ -39,8 +45,7 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
    endif
 endfunction
 
-let g:ycm_global_ycm_extra_conf = '.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_global_ycm_extra_conf = '.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
@@ -121,7 +126,19 @@ nmap tb :TagbarToggle<CR>
 "Set up shortcut for NERDTree
 nmap tn :NERDTreeToggle<CR>
 
-"Enable neocomplete
-let g:neocomplete#enable_at_startup = 1 
-
 map ; :
+
+"Set default ycm file
+let g:ycm_global_ycm_extra_conf = '/home/mayankbh/.ycm.py'
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_extra_conf_vim_data = ['&filetype']
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_auto_trigger = 1
+let g:ycm_min_num_of_chars_for_completion = 2
+
+"vim-easytags options
+let g:easytags_async=1
+let g:ycm_collect_identifiers_from_tags_files=0
+let g:easytags_auto_highlight=0
+

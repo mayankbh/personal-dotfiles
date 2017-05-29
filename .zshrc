@@ -56,7 +56,8 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#plugins=(git)
+plugins=(history-substring-search)
 
 
 # User configuration
@@ -120,23 +121,97 @@ export KEYTIMEOUT=1
 #zle -N zle-keymap-select
 #
 
-precmd() {
-  RPROMPT=""
+#   precmd() {
+#	  RPROMPT=""
+#	}
+#	zle-keymap-select() {
+#	  RPROMPT=""
+#	  [[ $KEYMAP = vicmd ]] && RPROMPT="(CMD)"
+#	  () { return $__prompt_status }
+#	  zle reset-prompt
+#	}
+#	zle-line-init() {
+#	  typeset -g __prompt_status="$?"
+#	}
+#	zle -N zle-keymap-select
+#	zle -N zle-line-init
+#	
+#	bindkey '^R' history-incremental-pattern-search-backward
+#	bindkey -M vicmd '/' history-incremental-pattern-search-backward
+#	bindkey -M vicmd '?' history-incremental-pattern-search-forward
+#	bindkey -M viins '^R' history-incremental-pattern-search-backward
+#	bindkey -M viins '^F' history-incremental-pattern-search-forward
+#	
+
+# vim mode indicator in prompt (http://superuser.com/questions/151803/how-do-i-customize-zshs-vim-mode)
+vim_ins_mode="%{$fg[cyan]%}[INS]%{$reset_color%}"
+vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+# background jobs indicator in prompt (https://gist.github.com/remy/6079223)
+function background_jobs() {
+  [[ $(jobs -l | wc -l) -gt 0 ]] && echo "⚙"
 }
-zle-keymap-select() {
-  RPROMPT=""
-  [[ $KEYMAP = vicmd ]] && RPROMPT="(CMD)"
-  () { return $__prompt_status }
+
+# online indicator in prompt (https://gist.github.com/remy/6079223)
+ONLINE="%{%F{green}%}◉%{$reset_color%}"
+OFFLINE="%{%F{red}%}⦿%{$reset_color%}"
+
+function prompt_online() {
+  if [[ -f ~/.offline ]]; then
+    echo $OFFLINE
+  else
+    echo $ONLINE
+  fi
+}
+
+function ssh_prompt_color() {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo '%{%F{blue}%}'
+  else
+    echo '%{%F{green}%}'
+  fi
+}
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
   zle reset-prompt
 }
-zle-line-init() {
-  typeset -g __prompt_status="$?"
-}
 zle -N zle-keymap-select
-zle -N zle-line-init
 
-bindkey '^R' history-incremental-pattern-search-backward
-bindkey -M vicmd '/' history-incremental-pattern-search-backward
-bindkey -M vicmd '?' history-incremental-pattern-search-forward
-bindkey -M viins '^R' history-incremental-pattern-search-backward
-bindkey -M viins '^F' history-incremental-pattern-search-forward
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+# Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
+# Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+}
+
+source ~/zsh-git-prompt/zshrc.sh ;
+
+
+PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) ${smiley} %{$reset_color%}'
+
+RPROMPT='$(prompt_online) %{$fg[white]%}%T%{$reset_color%}'
+
+
+#
+export EDITOR=vim
+
+#To switch between python2.7 and python3
+venv() {
+    local activate=~/.python/$1/bin/activate
+    if [ -e "$activate" ] ; then
+        source "$activate"
+    else
+        echo "Error: Not found: $activate"
+    fi
+}
+venv27() { venv 27 ; }
+
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
