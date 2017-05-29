@@ -194,9 +194,9 @@ function TRAPINT() {
 source ~/zsh-git-prompt/zshrc.sh ;
 
 
-PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) ${smiley} %{$reset_color%}'
+PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) %{$reset_color%}'
 
-RPROMPT='$(prompt_online) %{$fg[white]%}%T%{$reset_color%}'
+RPROMPT='%{$fg[white]%}%T%{$reset_color%}'
 
 
 #
