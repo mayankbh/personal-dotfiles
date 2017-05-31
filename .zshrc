@@ -215,3 +215,7 @@ venv27() { venv 27 ; }
 
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+
+
+# Simple alias that creates a markdown file with today's date (might want to look into using a function instead?)
+alias daily_post="title=\$(date | cut -f1-3,6  --delimiter=\" \" | sed 's/ /_/g').md; vim \$title"

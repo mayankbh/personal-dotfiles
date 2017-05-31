@@ -22,6 +22,7 @@ Plug 'valloric/youcompleteme'
 Plug 'sheerun/vim-polyglot'
 Plug 'xolox/vim-misc'                   "Dependency for vim-easytags
 Plug 'xolox/vim-easytags'
+Plug 'dhruvasagar/vim-table-mode'       "Table creation
 
 
 call plug#end()
@@ -142,3 +143,39 @@ let g:easytags_async=1
 let g:ycm_collect_identifiers_from_tags_files=0
 let g:easytags_auto_highlight=0
 
+let mapleader = ","
+
+"Setup shortcut for Table Mode Toggle
+nmap tm :TableModeToggle<CR>
+
+"You can use the following to quickly enable / disable table mode in insert
+"mode by using || or __ :
+"function! s:isAtStartOfLine(mapping)
+"  let text_before_cursor = getline('.')[0 : col('.')-1]
+"  let mapping_pattern = '\V' . escape(a:mapping, '\')
+"  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+"  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+"endfunction
+"
+"inoreabbrev <expr> <bar><bar>
+"          \ <SID>isAtStartOfLine('\|\|') ?
+"          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+"inoreabbrev <expr> __
+"          \ <SID>isAtStartOfLine('__') ?
+"          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+"
+"Markdown compatible tables
+let g:table_mode_corner='|'
+
+"Shortcut to Tableize
+nmap tt :Tableize
+
+xmap tt :Tableize
+
+let g:table_mode_delete_row_map = 'tdd'
+let g:table_mode_delete_column_map = 'tdc'
+
+let g:table_mode_motion_up_map = 'tk'
+let g:table_mode_motion_down_map = 'tj'
+let g:table_mode_motion_left_map = 'th'
+let g:table_mode_motion_right_map = 'tl'
