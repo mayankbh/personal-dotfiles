@@ -218,4 +218,18 @@ bindkey "^[[B" history-substring-search-down
 
 
 # Simple alias that creates a markdown file with today's date (might want to look into using a function instead?)
-alias daily_post="title=\$(date | cut -f1-3,6  --delimiter=\" \" | sed 's/ /_/g').md; vim \$title"
+alias daily_post="title=\$(date +%d_%B_%Y).md; vim \$title"
+
+# Codi
+# Usage: codi [filetype] [filename]
+codi() {
+  local syntax="${1:-python}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax" "$@"
+}

@@ -23,6 +23,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'xolox/vim-misc'                   "Dependency for vim-easytags
 Plug 'xolox/vim-easytags'
 Plug 'dhruvasagar/vim-table-mode'       "Table creation
+Plug 'metakirby5/codi.vim'              "REPL in vim
 
 
 call plug#end()
