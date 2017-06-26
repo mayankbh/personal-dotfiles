@@ -23,7 +23,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'xolox/vim-misc'                   "Dependency for vim-easytags
 Plug 'xolox/vim-easytags'
 Plug 'dhruvasagar/vim-table-mode'       "Table creation
-Plug 'metakirby5/codi.vim'              "REPL in vim
+Plug 'metakirby5/codi.vim'              "REPL in vim TODO Doesn't work yet, think I need to set up my interpreter correctly
+Plug 'nathanaelkane/vim-indent-guides'  "Indent guides
+Plug 'airblade/vim-rooter'              "Useful for detecting project root even when I'm knee deep in the source
+Plug 'xuyuanp/nerdtree-git-plugin'      "Show git status in NerdTree
+Plug 'jistr/vim-nerdtree-tabs'          "NerdTree + Tabs
+Plug 'suan/vim-instant-markdown'        "Markdown preview
 
 
 call plug#end()
@@ -126,7 +131,8 @@ nmap <F8> :TagbarToggle<CR>
 nmap tb :TagbarToggle<CR>
 
 "Set up shortcut for NERDTree
-nmap tn :NERDTreeToggle<CR>
+"nmap tn :NERDTreeToggle<CR>
+nmap tn :NERDTreeTabsToggle<CR>
 
 map ; :
 
@@ -180,3 +186,16 @@ let g:table_mode_motion_up_map = 'tk'
 let g:table_mode_motion_down_map = 'tj'
 let g:table_mode_motion_left_map = 'th'
 let g:table_mode_motion_right_map = 'tl'
+
+colorscheme default
+
+"ctags - open definition in new split using Alt + ]
+"TODO Doesn't seem to work
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+nmap tp :CtrlP <CR>
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+"Hopefully nicer looking splits
+set fillchars+=vert:\ 
+

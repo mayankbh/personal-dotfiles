@@ -31,7 +31,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+ DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -233,3 +233,8 @@ codi() {
     hi NonText ctermfg=0 |\
     Codi $syntax" "$@"
 }
+
+alias youtube_ringtone="youtube-dl --extract-audio --audio-format mp3 "
+
+alias start_eclimd="nohup /home/mayankbh/.eclipse/org.eclipse.platform_4.6.3_155965261_linux_gtk_x86_64/eclimd 0<&- &>/dev/null &"
+
