@@ -29,6 +29,10 @@ Plug 'airblade/vim-rooter'              "Useful for detecting project root even 
 Plug 'xuyuanp/nerdtree-git-plugin'      "Show git status in NerdTree
 Plug 'jistr/vim-nerdtree-tabs'          "NerdTree + Tabs
 Plug 'suan/vim-instant-markdown'        "Markdown preview
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'jansenm/vim-cmake'                "Cmake reference/autocompletion
+Plug 'vimwiki/vimwiki'
+
 
 
 call plug#end()
@@ -199,3 +203,39 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 "Hopefully nicer looking splits
 set fillchars+=vert:\ 
 
+"Setup CODI for Python
+let g:codi#interpreters = {
+                   \ 'python': {
+                       \ 'bin': 'python',
+                       \ 'prompt': '^\(>>>\|\.\.\.\) ',
+                       \ },
+                   \ }
+
+"Variable to hold state of spellcheck
+let s:spellingenabled = 0
+
+"Flip the aforementioned variable
+function! ToggleSpelling()
+    if s:spellingenabled
+        setlocal nospell
+        let s:spellingenabled = 0
+    else
+        setlocal spell spelllang=en_gb
+        let s:spellingenabled = 1
+    endif
+endfunction
+
+"Map ts -> toggle spelling
+nmap <silent> ts :call ToggleSpelling()<CR>
+
+"Make it easier to access vimwiki using tww
+"Other shortcuts
+"wt - open index file in new tab
+"ws - select and open wiki index file
+"wd - delete current wiki file
+"wr - rename current wiki file
+nmap tww <Leader>ww
+nmap twt <Leader>wt
+nmap tws <Leader>ws
+nmap twd <Leader>wd
+nmap twr <Leader>wr
