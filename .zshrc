@@ -236,5 +236,7 @@ codi() {
 
 alias youtube_ringtone="youtube-dl --extract-audio --audio-format mp3 "
 
-alias start_eclimd="nohup /home/mayankbh/.eclipse/org.eclipse.platform_4.6.3_155965261_linux_gtk_x86_64/eclimd 0<&- &>/dev/null &"
+#org.eclipse.platform_4.7.0_155965261
+
+alias start_eclimd="nohup /home/mayankbh/.eclipse/org.eclipse.platform_4.7.0_155965261_linux_gtk_x86_64/eclimd 0<&- &>/dev/null &"
 
