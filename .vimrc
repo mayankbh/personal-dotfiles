@@ -29,11 +29,12 @@ Plug 'airblade/vim-rooter'              "Useful for detecting project root even 
 Plug 'xuyuanp/nerdtree-git-plugin'      "Show git status in NerdTree
 Plug 'jistr/vim-nerdtree-tabs'          "NerdTree + Tabs
 Plug 'suan/vim-instant-markdown'        "Markdown preview
-Plug 'pboettch/vim-cmake-syntax'
+Plug 'pboettch/vim-cmake-syntax'        
 Plug 'jansenm/vim-cmake'                "Cmake reference/autocompletion
-Plug 'vimwiki/vimwiki'
-
-
+Plug 'vimwiki/vimwiki'                  "Useful for not taking
+Plug 'tpope/vim-obsession'              "Track vim sessions
+Plug 'fatih/vim-go'                     "Go development plugin
+Plug 'rust-lang/rust.vim'               "Rust development plugin
 
 call plug#end()
 

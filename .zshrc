@@ -194,9 +194,7 @@ function TRAPINT() {
 source ~/zsh-git-prompt/zshrc.sh ;
 
 
-PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) %{$reset_color%}'
-
-RPROMPT='%{$fg[white]%}%T%{$reset_color%}'
+#PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) %{$reset_color%}'
 
 
 #
@@ -239,4 +237,13 @@ alias youtube_ringtone="youtube-dl --extract-audio --audio-format mp3 "
 #org.eclipse.platform_4.7.0_155965261
 
 alias start_eclimd="nohup /home/mayankbh/.eclipse/org.eclipse.platform_4.7.0_155965261_linux_gtk_x86_64/eclimd 0<&- &>/dev/null &"
+
+synchronized_panes=""
+
+PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%n$(ssh_prompt_color)@%m%{$reset_color%}: %{$fg[blue]%}%~%{$reset_color%} $(git_super_status) %{$reset_color%} ${vim_mode} %{$fg[white]%}$(background_jobs) %{$reset_color%} ${synchronized_panes}'
+
+RPROMPT='%{$fg[white]%}%T%{$reset_color%}'
+
+#Update path for LLFI GUI
+export PATH="/home/mayankbh/Academics/Fall2017/CS536/Project/NN_Fault_Injection/LLFI_Installer/llfi/bin:$PATH"
 
