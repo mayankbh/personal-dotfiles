@@ -1,0 +1,40 @@
+source "gpg -d ~/.mutt/passwords.gpg |"
+set editor=vim
+# Automatically log in to this mailbox at startup
+set spoolfile="imaps://mayankb2@imap.illinois.edu/INBOX"
+set smtp_url=smtps://mayankb2@smtp.illinois.edu
+# Define the = shortcut, and the entry point for the folder browser (c?)
+set folder="imaps://imap.illinois.edu/INBOX"
+set record="=Sent"
+set postponed="=Drafts"
+set ssl_starttls=yes
+set ssl_force_tls=yes
+set imap_check_subscribed
+set mail_check=60
+set timeout=10
+set header_cache=~/.hcache
+set net_inc=5
+
+set realname='Mayank Bhatt'
+set from=mayankb2@illinois.edu
+set hostname=illinois.edu
+set signature="Mayank Bhatt"
+
+#For vim
+set text_flowed
+#
+#
+#Use default colors
+color normal default default
+#Source color scheme
+source ~/.mutt-black
+
+#Pager settings
+bind pager <up> previous-line #scroll inside the message rather than the index
+bind pager <down> next-line
+
+#Dealing with HTML email :(
+# Sanely handle multi-part messages (prefer text part, but yield to
+# # mailcap-configured rendering for html-only)
+alternative_order text/plain text/html
+auto_view text/html
