@@ -247,3 +247,6 @@ RPROMPT='%{$fg[white]%}%T%{$reset_color%}'
 #Update path for LLFI GUI
 export PATH="/home/mayankbh/Academics/Fall2017/CS536/Project/NN_Fault_Injection/LLFI_Installer/llfi/bin:$PATH"
 
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+
+export HADOOP_HOME="/home/mayankbh/Academics/Spring2018/Graph_Scheduling/codebase/Hadoop/hadoop-2.9.0/"

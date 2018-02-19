@@ -35,6 +35,18 @@ Plug 'vimwiki/vimwiki'                  "Useful for not taking
 Plug 'tpope/vim-obsession'              "Track vim sessions
 Plug 'fatih/vim-go'                     "Go development plugin
 Plug 'rust-lang/rust.vim'               "Rust development plugin
+"Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'  }  "Go autocompletion
+"Plug 'vim-scripts/auctex.vim'           "Macros for Latex
+"Plug 'latex-box-team/latex-box'         "Compilation for Latex
+Plug 'lervag/vimtex'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'kana/vim-operator-user'           "Needed for vim-clang-format
+Plug 'rhysd/vim-clang-format'           "Clang formatting
+
+
+
+
 
 call plug#end()
 
@@ -149,6 +161,7 @@ let g:ycm_extra_conf_vim_data = ['&filetype']
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_auto_trigger = 1
 let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_add_preview_to_completeopt=1
 
 "vim-easytags options
 let g:easytags_async=1
@@ -240,3 +253,15 @@ nmap twt <Leader>wt
 nmap tws <Leader>ws
 nmap twd <Leader>wd
 nmap twr <Leader>wr
+
+
+"YouCompleteMe for python
+let g:ycm_python_binary_path = 'python'
+let g:polyglot_disabled = ['latex']
+
+
+"Autorun clang format on buffer write
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
+autocmd FileType h ClangFormatAutoEnable
+autocmd FileType hpp ClangFormatAutoEnable

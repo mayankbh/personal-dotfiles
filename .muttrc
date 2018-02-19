@@ -1,14 +1,25 @@
 source "gpg -d ~/.mutt/passwords.gpg |"
+
 set editor=vim
 # Automatically log in to this mailbox at startup
 set spoolfile="imaps://mayankb2@imap.illinois.edu/INBOX"
-set smtp_url=smtps://mayankb2@smtp.illinois.edu
+
+#set spoolfile="imap://mayankb2@localhost:1143/INBOX"
+#
+set smtp_url=smtp://mayankb2:$smtp_pass@smtp.illinois.edu
+
+#set smtp_url=smtp://mayankb2:$smtp_pass@localhost:1025
+#set ssl_force_tls = yes
+#set ssl_starttls=yes
 # Define the = shortcut, and the entry point for the folder browser (c?)
 set folder="imaps://imap.illinois.edu/INBOX"
+
+#set folder="imap://localhost:1143/Inbox"
+#
 set record="=Sent"
 set postponed="=Drafts"
-set ssl_starttls=yes
-set ssl_force_tls=yes
+#set ssl_starttls=yes
+#set ssl_force_tls=yes
 set imap_check_subscribed
 set mail_check=60
 set timeout=10
@@ -38,3 +49,11 @@ bind pager <down> next-line
 # # mailcap-configured rendering for html-only)
 alternative_order text/plain text/html
 auto_view text/html
+
+set sort=threads
+
+set sendmail="/usr/bin/msmtp"
+
+
+set imap_keepalive=300
+
