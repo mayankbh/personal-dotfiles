@@ -250,3 +250,5 @@ export PATH="/home/mayankbh/Academics/Fall2017/CS536/Project/NN_Fault_Injection/
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 
 export HADOOP_HOME="/home/mayankbh/Academics/Spring2018/Graph_Scheduling/codebase/Hadoop/hadoop-2.9.0/"
+export ZOOKEEPER_HOME="/home/mayankbh/Academics/Spring2018/Graph_Scheduling/codebase/ZooKeeper/zookeeper-3.4.11/"
+
