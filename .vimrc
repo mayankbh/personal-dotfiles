@@ -43,7 +43,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'kana/vim-operator-user'           "Needed for vim-clang-format
 Plug 'rhysd/vim-clang-format'           "Clang formatting
-
+Plug 'pangloss/vim-javascript'          "Javascript Linting
 
 
 
@@ -265,3 +265,13 @@ autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
 autocmd FileType h ClangFormatAutoEnable
 autocmd FileType hpp ClangFormatAutoEnable
+
+
+"Quick ways to open Go definitions
+au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
+au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+
+
+let g:clang_format#style_options = {
+    \ "BreakBeforeBraces": "Allman"}
