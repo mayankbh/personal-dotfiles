@@ -2,8 +2,9 @@ call plug#begin()
 
 Plug 'scrooloose/nerdtree'              "File Browsing, t, i, s for tab, horizontal, vertical split opening, m to open menu
 Plug 'tpope/vim-fugitive'               "Git wrapper
-Plug 'scrooloose/syntastic'             "Syntax checking
-Plug 'tpope/vim-surround'               "Easier to modify braces, quotes etc. Use cs<to replace><replacement>, ds=delete surrounding
+"Plug 'scrooloose/syntastic'             "Syntax checking
+Plug 'w0rp/ale'
+"Plug 'tpope/vim-surround'               "Easier to modify braces, quotes etc. Use cs<to replace><replacement>, ds=delete surrounding
 Plug 'bling/vim-airline'                "Bottom bar
 Plug 'scrooloose/nerdcommenter'         "Easier commenting
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable'} 
@@ -11,7 +12,9 @@ Plug 'christoomey/vim-tmux-navigator'   "Switching between tmux and vim splits e
 Plug 'junegunn/vim-easy-align'          "Select text, then run 'ga' and then <char to align around>
 Plug 'tpope/vim-sensible'               "Sensible defaults
 Plug 'sickill/vim-pasta'                "Context aware pasting
-Plug 'ctrlpvim/ctrlp.vim'               "Fuzzy file finder
+"Plug 'ctrlpvim/ctrlp.vim'               "Fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'octol/vim-cpp-enhanced-highlight' "Duh
 Plug 'majutsushi/tagbar'                "Tags
 Plug 'raimondi/delimitmate'             "Automatically inserting braces, etc
@@ -44,10 +47,9 @@ Plug 'slashmili/alchemist.vim'
 Plug 'kana/vim-operator-user'           "Needed for vim-clang-format
 Plug 'rhysd/vim-clang-format'           "Clang formatting
 Plug 'pangloss/vim-javascript'          "Javascript Linting
-
-
-
-
+Plug 'SirVer/ultisnips'                 "Ultisnips
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 
@@ -275,3 +277,14 @@ au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
 
 let g:clang_format#style_options = {
     \ "BreakBeforeBraces": "Allman"}
+
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+

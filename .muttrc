@@ -1,39 +1,12 @@
-source "gpg -d ~/.mutt/passwords.gpg |"
+folder-hook 'account.com.gmail.mayankbh' 'source " gpg -d ~/.mutt/account.com.gmail.mayankbh.gpg |"'
+folder-hook 'account.edu.illinois.mayankb2' 'source " gpg -d ~/.mutt/account.edu.illinois.mayankb2.gpg |"'
 
-set editor=vim
-# Automatically log in to this mailbox at startup
-set spoolfile="imaps://mayankb2@imap.illinois.edu/INBOX"
-
-#set spoolfile="imap://mayankb2@localhost:1143/INBOX"
-#
-set smtp_url=smtp://mayankb2:$smtp_pass@smtp.illinois.edu
-
-#set smtp_url=smtp://mayankb2:$smtp_pass@localhost:1025
-#set ssl_force_tls = yes
-#set ssl_starttls=yes
-# Define the = shortcut, and the entry point for the folder browser (c?)
-set folder="imaps://imap.illinois.edu/INBOX"
-
-#set folder="imap://localhost:1143/Inbox"
-#
-set record="=Sent"
-set postponed="=Drafts"
-#set ssl_starttls=yes
-#set ssl_force_tls=yes
-set imap_check_subscribed
-set mail_check=60
-set timeout=10
-set header_cache=~/.hcache
-set net_inc=5
-
-set realname='Mayank Bhatt'
-set from=mayankb2@illinois.edu
-set hostname=illinois.edu
-set signature="Mayank Bhatt"
+source " gpg -d ~/.mutt/account.com.gmail.mayankbh.gpg |"
+#source " gpg -d ~/.mutt/account.edu.illinois.mayankb2.gpg |"
 
 #For vim
+set editor=vim
 set text_flowed
-#
 #
 #Use default colors
 color normal default default
@@ -52,8 +25,19 @@ auto_view text/html
 
 set sort=threads
 
-set sendmail="/usr/bin/msmtp"
+#set sendmail="/usr/bin/msmtp"
 
 
-set imap_keepalive=300
+set imap_keepalive=900
 
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source " gpg -d ~/.mutt/account.com.gmail.mayankbh.gpg |"<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source " gpg -d ~/.mutt/account.edu.illinois.mayankb2.gpg |"<enter><change-folder>!<enter>'
+
+# Fetch mail shortcut
+bind index G imap-fetch-mail
+
+# Neomutt sidebar settings
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
