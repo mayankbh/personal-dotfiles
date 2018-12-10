@@ -1,55 +1,49 @@
 call plug#begin()
 
+" File Organization/Code Browsing
 Plug 'scrooloose/nerdtree'              "File Browsing, t, i, s for tab, horizontal, vertical split opening, m to open menu
-Plug 'tpope/vim-fugitive'               "Git wrapper
-"Plug 'scrooloose/syntastic'             "Syntax checking
-Plug 'w0rp/ale'
-"Plug 'tpope/vim-surround'               "Easier to modify braces, quotes etc. Use cs<to replace><replacement>, ds=delete surrounding
-Plug 'bling/vim-airline'                "Bottom bar
-Plug 'scrooloose/nerdcommenter'         "Easier commenting
-Plug 'rdnetto/ycm-generator', { 'branch': 'stable'} 
-Plug 'christoomey/vim-tmux-navigator'   "Switching between tmux and vim splits easily
-Plug 'junegunn/vim-easy-align'          "Select text, then run 'ga' and then <char to align around>
-Plug 'tpope/vim-sensible'               "Sensible defaults
-Plug 'sickill/vim-pasta'                "Context aware pasting
-"Plug 'ctrlpvim/ctrlp.vim'               "Fuzzy file finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'octol/vim-cpp-enhanced-highlight' "Duh
-Plug 'majutsushi/tagbar'                "Tags
-Plug 'raimondi/delimitmate'             "Automatically inserting braces, etc
-"Plug 'shougo/neocomplete.vim'           "Neocomplete
-"Plug 'shougo/neco-vim'                  "Vim completion
-"Plug 'osyo-manga/vim-marching'          "Async clang completion
-Plug 'valloric/youcompleteme'
-Plug 'sheerun/vim-polyglot'
-Plug 'xolox/vim-misc'                   "Dependency for vim-easytags
-Plug 'xolox/vim-easytags'
-Plug 'dhruvasagar/vim-table-mode'       "Table creation
-Plug 'metakirby5/codi.vim'              "REPL in vim TODO Doesn't work yet, think I need to set up my interpreter correctly
-Plug 'nathanaelkane/vim-indent-guides'  "Indent guides
-Plug 'airblade/vim-rooter'              "Useful for detecting project root even when I'm knee deep in the source
-Plug 'xuyuanp/nerdtree-git-plugin'      "Show git status in NerdTree
 Plug 'jistr/vim-nerdtree-tabs'          "NerdTree + Tabs
-Plug 'suan/vim-instant-markdown'        "Markdown preview
-Plug 'pboettch/vim-cmake-syntax'        
-Plug 'jansenm/vim-cmake'                "Cmake reference/autocompletion
-Plug 'vimwiki/vimwiki'                  "Useful for not taking
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'                 " Fuzzy finder
+Plug 'rking/ag.vim'                     " Silver searcher
+Plug 'majutsushi/tagbar'                "Tags
+
+" Git
+Plug 'tpope/vim-fugitive'               "Git wrapper
+Plug 'xuyuanp/nerdtree-git-plugin'      "Show git status in NerdTree
+
+" Linting/Syn
+Plug 'w0rp/ale'
+
+" Terminal quality of life
+Plug 'bling/vim-airline'                "Bottom bar
 Plug 'tpope/vim-obsession'              "Track vim sessions
+Plug 'christoomey/vim-tmux-navigator'   "Switching between tmux and vim splits easily
+
+" Quality of Life 
+Plug 'raimondi/delimitmate'             "Automatically inserting braces, etc
+Plug 'nathanaelkane/vim-indent-guides'  "Indent guides
+Plug 'junegunn/vim-easy-align'          "Select text, then run 'ga' and then <char to align around>
+Plug 'sickill/vim-pasta'                "Context aware pasting
+
+" Language specific
 Plug 'fatih/vim-go'                     "Go development plugin
 Plug 'rust-lang/rust.vim'               "Rust development plugin
-"Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'  }  "Go autocompletion
-"Plug 'vim-scripts/auctex.vim'           "Macros for Latex
-"Plug 'latex-box-team/latex-box'         "Compilation for Latex
-Plug 'lervag/vimtex'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'kana/vim-operator-user'           "Needed for vim-clang-format
-Plug 'rhysd/vim-clang-format'           "Clang formatting
+Plug 'suan/vim-instant-markdown'        "Markdown preview
+Plug 'jansenm/vim-cmake'                "Cmake reference/autocompletion
+Plug 'pboettch/vim-cmake-syntax'        
+Plug 'elixir-lang/vim-elixir'           "Elixir
 Plug 'pangloss/vim-javascript'          "Javascript Linting
-Plug 'SirVer/ultisnips'                 "Ultisnips
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'lervag/vimtex'
+
+" Miscellaneous
+Plug 'tpope/vim-sensible'               "Sensible defaults
+Plug 'vimwiki/vimwiki'                  "Useful for note taking
+Plug 'dhruvasagar/vim-table-mode'       "Table creation
+
+
 call plug#end()
 
 
@@ -71,7 +65,6 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
    endif
 endfunction
 
-"let g:ycm_global_ycm_extra_conf = '.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
@@ -155,21 +148,6 @@ nmap tn :NERDTreeTabsToggle<CR>
 
 map ; :
 
-"Set default ycm file
-let g:ycm_global_ycm_extra_conf = '/home/mayankbh/.ycm.py'
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_extra_conf_vim_data = ['&filetype']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_add_preview_to_completeopt=1
-
-"vim-easytags options
-let g:easytags_async=1
-let g:ycm_collect_identifiers_from_tags_files=0
-let g:easytags_auto_highlight=0
-
 let mapleader = ","
 
 "Setup shortcut for Table Mode Toggle
@@ -209,9 +187,6 @@ let g:table_mode_motion_right_map = 'tl'
 
 colorscheme default
 
-"ctags - open definition in new split using Alt + ]
-"TODO Doesn't seem to work
-map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 nmap tp :CtrlP <CR>
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -257,9 +232,6 @@ nmap twd <Leader>wd
 nmap twr <Leader>wr
 
 
-"YouCompleteMe for python
-let g:ycm_python_binary_path = 'python'
-let g:polyglot_disabled = ['latex']
 
 
 "Autorun clang format on buffer write
@@ -269,10 +241,6 @@ autocmd FileType h ClangFormatAutoEnable
 autocmd FileType hpp ClangFormatAutoEnable
 
 
-"Quick ways to open Go definitions
-au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
-au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
-au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
 
 
 let g:clang_format#style_options = {
@@ -286,5 +254,15 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger="<c-j>"
 
+"Remap Ctrl + P to call FZF's file search
+nnoremap <C-F> :Files<CR>     
 
+" Silver searcher shortcut
+nnoremap <C-A> :Ag<CR>
 
+"Remap Ctrl + O to call FZF's commit search
+nnoremap <C-O> :Commits<CR>
+
+" Remap jk and kj to <ESC>
+inoremap jk <ESC>
+inoremap kj <ESC>
